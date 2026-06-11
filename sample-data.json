@@ -1,0 +1,38 @@
+[
+  {
+    "id": "1717900000000",
+    "date": "2026-06-07",
+    "mood": 4,
+    "sleep": 8,
+    "energy": 7,
+    "stress": 4,
+    "activities": ["Exercise", "Work"],
+    "notes": "Had a productive morning, gym session energized me",
+    "timestamp": "2026-06-07T22:00:00Z",
+    "breathing": 5
+  },
+  {
+    "id": "1717986400000",
+    "date": "2026-06-08",
+    "mood": 3,
+    "sleep": 6.5,
+    "energy": 5,
+    "stress": 6,
+    "activities": ["Work", "Reading"],
+    "notes": "Feeling neutral, work was hectic but reading helped me relax",
+    "timestamp": "2026-06-08T22:00:00Z",
+    "breathing": 0
+  },
+  {
+    "id": "1718072800000",
+    "date": "2026-06-09",
+    "mood": 5,
+    "sleep": 8.5,
+    "energy": 9,
+    "stress": 2,
+    "activities": ["Meditation", "Exercise", "Social"],
+    "notes": "Amazing day! Feeling great after morning meditation and workout",
+    "timestamp": "2026-06-09T22:00:00Z",
+    "breathing": 10
+  }
+]

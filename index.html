@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aura — Premium Daily Mood Tracker & Mindfulness Dashboard</title>
+  <meta name="description" content="Monitor your mental well-being, log activities, analyze sleep, energy, and stress trends, and cultivate mindfulness with Aura, a privacy-focused offline dashboard.">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body class="dark-theme">
+  <!-- Background Decorative Glowing Blobs -->
+  <div class="blob blob-1" aria-hidden="true"></div>
+  <div class="blob blob-2" aria-hidden="true"></div>
+  <div class="blob blob-3" aria-hidden="true"></div>
+
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="brand-section">
+        <div class="logo-container">
+          <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="10" fill="url(#logo-grad)" />
+            <path d="M12 6C8.68629 6 6 8.68629 6 12C6 15.3137 8.68629 18 12 18C15.3137 18 18 15.3137 18 12" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="12" cy="12" r="3" fill="white" />
+            <defs>
+              <linearGradient id="logo-grad" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#8B5CF6"/>
+                <stop offset="1" stop-color="#EC4899"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1 id="app-title">Aura</h1>
+          <p id="app-tagline">Mindful Mood Tracking</p>
+        </div>
+      </div>
+
+      <!-- Quick Metrics Summary Dashboard -->
+      <div class="quick-stats-container">
+        <div class="quick-stat-card" id="stat-avg-mood">
+          <span class="stat-label">Average Mood</span>
+          <span class="stat-value" id="val-avg-mood">—</span>
+        </div>
+        <div class="quick-stat-card" id="stat-streak">
+          <span class="stat-label">Streak</span>
+          <span class="stat-value" id="val-streak">0 days</span>
+        </div>
+        <div class="quick-stat-card" id="stat-logs">
+          <span class="stat-label">Total Logs</span>
+          <span class="stat-value" id="val-logs">0</span>
+        </div>
+        <div class="quick-stat-card" id="stat-breathing">
+          <span class="stat-label">Mindful Min</span>
+          <span class="stat-value" id="val-breathing">0m</span>
+        </div>
+      </div>
+
+      <!-- Controls (Theme toggle, Settings dropdown, etc.) -->
+      <div class="header-controls">
+        <button id="theme-toggle-btn" class="icon-btn" aria-label="Toggle dark/light mode">
+          <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="main-layout">
+      <!-- Left Column: Log Form Card -->
+      <section class="panel-card log-panel">
+        <h2 class="panel-title" id="form-heading">Log Your Day</h2>
+        
+        <form id="mood-log-form">
+          <!-- 1. Mood Selection -->
+          <div class="form-group">
+            <label class="group-label">How are you feeling today?</label>
+            <div class="mood-selection-grid">
+              <label class="mood-option" for="mood-awful">
+                <input type="radio" name="mood" id="mood-awful" value="1" required>
+                <div class="mood-box" data-mood="1">
+                  <span class="mood-emoji">😢</span>
+                  <span class="mood-name">Awful</span>
+                </div>
+              </label>
+              
+              <label class="mood-option" for="mood-bad">
+                <input type="radio" name="mood" id="mood-bad" value="2">
+                <div class="mood-box" data-mood="2">
+                  <span class="mood-emoji">🙁</span>
+                  <span class="mood-name">Bad</span>
+                </div>
+              </label>
+              
+              <label class="mood-option" for="mood-meh">
+                <input type="radio" name="mood" id="mood-meh" value="3">
+                <div class="mood-box" data-mood="3">
+                  <span class="mood-emoji">😐</span>
+                  <span class="mood-name">Meh</span>
+                </div>
+              </label>
+              
+              <label class="mood-option" for="mood-good">
+                <input type="radio" name="mood" id="mood-good" value="4">
+                <div class="mood-box" data-mood="4">
+                  <span class="mood-emoji">🙂</span>
+                  <span class="mood-name">Good</span>
+                </div>
+              </label>
+              
+              <label class="mood-option" for="mood-rad">
+                <input type="radio" name="mood" id="mood-rad" value="5">
+                <div class="mood-box" data-mood="5">
+                  <span class="mood-emoji">😄</span>
+                  <span class="mood-name">Rad</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- 2. Interactive Metrics Sliders -->
+          <div class="form-group sliders-group">
+            <div class="slider-container">
+              <div class="slider-header">
+                <label for="sleep-slider" class="group-label">Sleep Duration</label>
+                <span class="slider-value-display" id="sleep-value">7.5 hrs</span>
+              </div>
+              <input type="range" id="sleep-slider" min="0" max="15" step="0.5" value="7.5" class="custom-slider">
+              <div class="slider-limits">
+                <span>0 hrs</span>
+                <span>8 hrs (Ideal)</span>
+                <span>15 hrs</span>
+              </div>
+            </div>
+
+            <div class="slider-container">
+              <div class="slider-header">
+                <label for="energy-slider" class="group-label">Energy Level</label>
+                <span class="slider-value-display" id="energy-value">5/10</span>
+              </div>
+              <input type="range" id="energy-slider" min="1" max="10" step="1" value="5" class="custom-slider">
+              <div class="slider-limits">
+                <span>Low</span>
+                <span>Balanced</span>
+                <span>High</span>
+              </div>
+            </div>
+
+            <div class="slider-container">
+              <div class="slider-header">
+                <label for="stress-slider" class="group-label">Stress Level</label>
+                <span class="slider-value-display" id="stress-value">5/10</span>
+              </div>
+              <input type="range" id="stress-slider" min="1" max="10" step="1" value="5" class="custom-slider">
+              <div class="slider-limits">
+                <span>Calm</span>
+                <span>Manageable</span>
+                <span>High</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Activities Tagging -->
+          <div class="form-group">
+            <label class="group-label">Activities & Factors</label>
+            <div class="activity-tags-container" id="activity-tags-pool">
+              <!-- Default Tags will be injected here by Javascript -->
+            </div>
+            
+            <div class="custom-tag-input-container">
+              <input type="text" id="custom-tag-input" placeholder="Add custom factor (e.g. Yoga, Coffee)" maxlength="20" aria-label="Add custom tag">
+              <button type="button" id="add-tag-btn" class="secondary-btn">Add</button>
+            </div>
+          </div>
+
+          <!-- 4. Journaling Area -->
+          <div class="form-group">
+            <label for="journal-textarea" class="group-label">Journal Notes</label>
+            <textarea id="journal-textarea" placeholder="How did today shape up? Jot down thoughts, highlights, or vents..." rows="4"></textarea>
+          </div>
+
+          <!-- Actions -->
+          <div class="form-actions">
+            <button type="button" id="cancel-edit-btn" class="secondary-btn hidden-element">Cancel Edit</button>
+            <button type="submit" id="submit-log-btn" class="primary-btn">
+              <span>Save Entry</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Right Column: Navigation Tabs & Display Panels -->
+      <section class="panel-card display-panel">
+        <!-- Dashboard Navigation -->
+        <nav class="display-nav" aria-label="Dashboard views">
+          <button id="tab-dashboard" class="tab-btn active" data-target="panel-dashboard">
+            <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="7" height="9"></rect>
+              <rect x="14" y="3" width="7" height="5"></rect>
+              <rect x="14" y="12" width="7" height="9"></rect>
+              <rect x="3" y="16" width="7" height="5"></rect>
+            </svg>
+            Dashboard
+          </button>
+          <button id="tab-calendar" class="tab-btn" data-target="panel-calendar">
+            <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            Calendar
+          </button>
+          <button id="tab-mindfulness" class="tab-btn" data-target="panel-mindfulness">
+            <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>
+              <path d="M19 10v1a7 7 0 0 1-14 0v-1"></path>
+              <line x1="12" y1="19" x2="12" y2="22"></line>
+            </svg>
+            Mindfulness
+          </button>
+          <button id="tab-history" class="tab-btn" data-target="panel-history">
+            <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 8v4l3 3"></path>
+              <circle cx="12" cy="12" r="9"></circle>
+            </svg>
+            History
+          </button>
+        </nav>
+
+        <!-- Dynamic Panels Container -->
+        <div class="panel-content-wrapper">
+          
+          <!-- View 1: Dashboard Analytics -->
+          <div class="tab-panel active" id="panel-dashboard">
+            <div class="dashboard-grid">
+              
+              <!-- Mood Trends Line Chart -->
+              <div class="analytics-card wide-card">
+                <div class="card-header">
+                  <h3 class="card-title">Mood Trend (Last 7 Logs)</h3>
+                  <p class="card-subtitle">Tracking emotional progression</p>
+                </div>
+                <div class="chart-container" id="trend-chart-wrapper">
+                  <!-- Custom Interactive SVG Chart generated by JS -->
+                  <svg id="trend-svg" viewBox="0 0 600 240" preserveAspectRatio="none">
+                    <!-- Placeholder or dynamic lines will be drawn here -->
+                  </svg>
+                  <div class="chart-y-labels">
+                    <span>Rad</span>
+                    <span>Good</span>
+                    <span>Meh</span>
+                    <span>Bad</span>
+                    <span>Awful</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Mood Distribution Bar Chart -->
+              <div class="analytics-card">
+                <div class="card-header">
+                  <h3 class="card-title">Mood Breakdown</h3>
+                  <p class="card-subtitle">Distribution of all logs</p>
+                </div>
+                <div class="distribution-bars-container" id="distribution-bars-wrapper">
+                  <!-- Generated by JS -->
+                </div>
+              </div>
+
+              <!-- Correlations / Insights Card -->
+              <div class="analytics-card">
+                <div class="card-header">
+                  <h3 class="card-title">Top Mood Boosters</h3>
+                  <p class="card-subtitle">Factors tied to best moods</p>
+                </div>
+                <div class="insights-container" id="insights-wrapper">
+                  <p class="empty-state-text">Log at least 3 days of metrics to discover activity correlations.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- View 2: Mood Calendar Heatmap -->
+          <div class="tab-panel" id="panel-calendar">
+            <div class="calendar-card">
+              <div class="calendar-header-controls">
+                <button id="prev-month-btn" class="icon-btn" aria-label="Previous month">◀</button>
+                <h3 id="calendar-month-title">June 2026</h3>
+                <button id="next-month-btn" class="icon-btn" aria-label="Next month">▶</button>
+              </div>
+              <div class="calendar-weekdays">
+                <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+              </div>
+              <div class="calendar-days-grid" id="calendar-days">
+                <!-- Days rendered dynamically by JS -->
+              </div>
+              <div class="calendar-legend">
+                <span class="legend-title">Legend:</span>
+                <div class="legend-items">
+                  <span class="legend-item"><span class="legend-color m-1"></span> Awful</span>
+                  <span class="legend-item"><span class="legend-color m-2"></span> Bad</span>
+                  <span class="legend-item"><span class="legend-color m-3"></span> Meh</span>
+                  <span class="legend-item"><span class="legend-color m-4"></span> Good</span>
+                  <span class="legend-item"><span class="legend-color m-5"></span> Rad</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- View 3: Mindfulness Breathing Space -->
+          <div class="tab-panel" id="panel-mindfulness">
+            <div class="breathing-card">
+              <div class="breathing-header">
+                <h3>Breathing Space</h3>
+                <p>Align your breath to dissolve stress and center your mind.</p>
+              </div>
+              
+              <!-- Breathing Guide Visualization -->
+              <div class="breathing-circle-outer">
+                <div class="breathing-glow"></div>
+                <div class="breathing-circle-inner" id="breathing-sphere">
+                  <span id="breathing-instruction">Press Start</span>
+                </div>
+              </div>
+
+              <!-- Breathing Timer Display -->
+              <div class="breathing-timer" id="breathing-timer-display">00:00</div>
+
+              <!-- Controls -->
+              <div class="breathing-controls">
+                <button id="start-breathing-btn" class="primary-btn play-btn">
+                  <span>Start Practice</span>
+                </button>
+                <button id="stop-breathing-btn" class="secondary-btn hidden-element">
+                  <span>End Session</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- View 4: Log History List -->
+          <div class="tab-panel" id="panel-history">
+            <div class="history-list-header">
+              <h3>Logged Activities</h3>
+              <div class="history-filters">
+                <select id="history-filter-mood" aria-label="Filter history by mood">
+                  <option value="all">All Moods</option>
+                  <option value="5">Rad 😄</option>
+                  <option value="4">Good 🙂</option>
+                  <option value="3">Meh 😐</option>
+                  <option value="2">Bad 🙁</option>
+                  <option value="1">Awful 😢</option>
+                </select>
+              </div>
+            </div>
+            <div class="history-logs-container" id="history-logs-list">
+              <!-- Logs injected dynamically by JS -->
+              <p class="empty-state-text">No entries logged yet. Try logging your mood using the form on the left!</p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer Controls (Data Management) -->
+    <footer class="app-footer">
+      <div class="footer-left">
+        <p>&copy; 2026 Aura. Designed for health, privacy, and inner peace.</p>
+      </div>
+      <div class="footer-actions">
+        <button id="export-data-btn" class="footer-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="17 8 12 3 7 8"></polyline>
+            <line x1="12" y1="3" x2="12" y2="15"></line>
+          </svg>
+          Export Data
+        </button>
+        <button id="import-data-btn" class="footer-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          Import Data
+        </button>
+        <input type="file" id="import-file-input" class="hidden-element" accept=".json">
+        
+        <button id="clear-data-btn" class="danger-footer-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="3 6 5 6 21 6"></polyline>
+            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+          </svg>
+          Clear Data
+        </button>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Main Application Logic -->
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

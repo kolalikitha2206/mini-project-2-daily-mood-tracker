@@ -1,0 +1,83 @@
+[
+  {
+    "id": "1781025344198",
+    "date": "2026-06-09",
+    "mood": 2,
+    "sleep": 0,
+    "energy": 5,
+    "stress": 5,
+    "activities": [],
+    "notes": "",
+    "timestamp": "2026-06-09T17:15:44.198Z"
+  },
+  {
+    "id": "1781067056183",
+    "date": "2026-06-10",
+    "mood": 5,
+    "sleep": 0,
+    "energy": 4,
+    "stress": 4,
+    "activities": [],
+    "notes": "",
+    "timestamp": "2026-06-10T04:50:56.183Z"
+  },
+  {
+    "id": "1781067611436",
+    "date": "2026-06-10",
+    "mood": 4,
+    "sleep": 11,
+    "energy": 10,
+    "stress": 1,
+    "activities": [],
+    "notes": "",
+    "timestamp": "2026-06-10T05:00:11.437Z"
+  },
+  {
+    "id": "1781067689270",
+    "date": "2026-06-10",
+    "mood": 4,
+    "sleep": 10,
+    "energy": 10,
+    "stress": 2,
+    "activities": [
+      "Cooking",
+      "Gaming",
+      "Work"
+    ],
+    "notes": "",
+    "timestamp": "2026-06-10T05:01:29.270Z"
+  },
+  {
+    "id": "1781067729299",
+    "date": "2026-06-10",
+    "mood": 3,
+    "sleep": 4,
+    "energy": 4,
+    "stress": 7,
+    "activities": [],
+    "notes": "",
+    "timestamp": "2026-06-10T05:02:09.299Z"
+  },
+  {
+    "id": "1781188532597",
+    "date": "2026-06-11",
+    "mood": 2,
+    "sleep": 2.5,
+    "energy": 2,
+    "stress": 10,
+    "activities": [],
+    "notes": "exam with fever",
+    "timestamp": "2026-06-11T14:54:46.672Z"
+  },
+  {
+    "id": "1781189203363",
+    "date": "2026-06-11",
+    "mood": 2,
+    "sleep": 1.5,
+    "energy": 2,
+    "stress": 10,
+    "activities": [],
+    "notes": "exam stress",
+    "timestamp": "2026-06-11T14:46:43.363Z"
+  }
+]
